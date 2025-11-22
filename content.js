@@ -42,7 +42,9 @@
 
   // Format size from KB to human-readable format
   function formatSize(kb) {
-    if (kb < 1024) {
+    if (kb === 0) {
+      return { value: '<1', unit: 'KB' };
+    } else if (kb < 1024) {
       return { value: kb, unit: 'KB' };
     } else if (kb < 1024 * 1024) {
       return { value: (kb / 1024).toFixed(1), unit: 'MB' };
