@@ -5,10 +5,12 @@ Chrome extension that displays GitHub repository size in the About section next 
 `insert chrome extenstion link after i register it`
 
 ## GitHub
-Works for public repos. Need to add a way to input a read-only PAT so users can view their private repos sizes as well
+Works for public repos. Private repos need a PAT.
 
 ## GitLab
-Work in progress... GitLab requires a PAT to get any repos information (public or private)
+Repos you own or are a contributor for (private or public) already have the size displayed in the Project Information section. Public repos need to have statistics publically enabled for non-contributors to get the size (most don't).
+
+This extension does not work for GitLab because it is unnecessary for repos you contribute to (GitLab already displays it) and usually does not work for repos you do not contribute to (GitLab requires project statistics to be set to public).
 
 ## How to Test
 1. Clone the repo

@@ -77,7 +77,8 @@
       if (!response.ok) {
         // 404 means repository not found or no access - don't display anything
         // 401 means unauthorized - don't display anything
-        if (response.status === 404 || response.status === 401) {
+        // 403 means forbidden (e.g., statistics disabled in GitLab) - don't display anything
+        if (response.status === 404 || response.status === 401 || response.status === 403) {
           return false;
         }
         throw new Error(`HTTP error! status: ${response.status}`);
