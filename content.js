@@ -56,7 +56,7 @@
   }
 
   // Fetch repository size from GitHub API
-  // Returns: size in KB, null for other errors, or false for 404 (don't display)
+  // Returns: size in KB, null for other errors, or false for 404/401 (don't display)
   async function fetchRepoSize(owner, repo) {
     try {
       // Get PAT from storage
@@ -76,7 +76,8 @@
       
       if (!response.ok) {
         // 404 means repository not found or no access - don't display anything
-        if (response.status === 404) {
+        // 401 means unauthorized - don't display anything
+        if (response.status === 404 || response.status === 401) {
           return false;
         }
         throw new Error(`HTTP error! status: ${response.status}`);

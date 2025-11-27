@@ -5,36 +5,53 @@ document.addEventListener('DOMContentLoaded', () => {
   const linkButton = document.getElementById('linkButton');
   const helpButton = document.getElementById('helpButton');
   const helpText = document.getElementById('helpText');
-  const status = document.getElementById('status');
+  const indicatorBox = document.getElementById('indicatorBox');
+  const eyeIcon = document.getElementById('eyeIcon');
+  const eyeSlashIcon = document.getElementById('eyeSlashIcon');
+  
+  let isVisible = false;
+  let originalValue = '';
 
   // Load existing PAT
   chrome.storage.sync.get(['githubPAT'], (result) => {
     if (result.githubPAT) {
       patInput.value = result.githubPAT;
+      originalValue = result.githubPAT;
     }
   });
 
-  // Save PAT when input changes
-  patInput.addEventListener('blur', () => {
-    const pat = patInput.value.trim();
-    if (pat) {
-      chrome.storage.sync.set({ githubPAT: pat }, () => {
-        status.textContent = 'PAT saved!';
-        status.classList.add('show');
-        setTimeout(() => {
-          status.classList.remove('show');
-        }, 2000);
-      });
+  // Toggle password visibility
+  indicatorBox.addEventListener('click', () => {
+    isVisible = !isVisible;
+    if (isVisible) {
+      patInput.type = 'text';
+      eyeIcon.style.display = 'block';
+      eyeSlashIcon.style.display = 'none';
     } else {
-      chrome.storage.sync.remove('githubPAT', () => {
-        status.textContent = 'PAT removed!';
-        status.classList.add('show');
-        setTimeout(() => {
-          status.classList.remove('show');
-        }, 2000);
-      });
+      patInput.type = 'password';
+      eyeIcon.style.display = 'none';
+      eyeSlashIcon.style.display = 'block';
     }
   });
+
+  // Save PAT when input changes and loses focus
+  patInput.addEventListener('blur', () => {
+    const pat = patInput.value.trim();
+    const hasChanged = pat !== originalValue;
+    
+    if (hasChanged) {
+      if (pat) {
+        chrome.storage.sync.set({ githubPAT: pat }, () => {
+          originalValue = pat;
+        });
+      } else {
+        chrome.storage.sync.remove('githubPAT', () => {
+          originalValue = '';
+        });
+      }
+    }
+  });
+
 
   // Open PAT creation page
   linkButton.addEventListener('click', () => {
