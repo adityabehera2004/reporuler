@@ -4,8 +4,17 @@
   "version": "1.0.0",
   "description": "Display GitHub repository size in the About section",
   "permissions": [
-    "activeTab"
+    "activeTab",
+    "storage"
   ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/github-ruler.png",
+      "48": "icons/github-ruler.png",
+      "128": "icons/github-ruler.png"
+    }
+  },
   "host_permissions": [
     "https://api.github.com/*"
   ],

@@ -59,7 +59,21 @@
   // Returns: size in KB, null for other errors, or false for 404 (don't display)
   async function fetchRepoSize(owner, repo) {
     try {
-      const response = await fetch(`https://api.github.com/repos/${owner}/${repo}`);
+      // Get PAT from storage
+      const result = await chrome.storage.sync.get(['githubPAT']);
+      const headers = {
+        'Accept': 'application/vnd.github.v3+json'
+      };
+      
+      // Add Authorization header if PAT exists
+      if (result.githubPAT) {
+        headers['Authorization'] = `token ${result.githubPAT}`;
+      }
+
+      const response = await fetch(`https://api.github.com/repos/${owner}/${repo}`, {
+        headers: headers
+      });
+      
       if (!response.ok) {
         // 404 means repository not found or no access - don't display anything
         if (response.status === 404) {

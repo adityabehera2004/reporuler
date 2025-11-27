@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    body {
+      width: 380px;
+      padding: 20px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      font-size: 14px;
+    }
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+    .header .icon-button + .icon-button {
+      margin-left: -4px;
+    }
+    .github-icon {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+    }
+    .input-container {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    input[type="text"] {
+      flex: 1;
+      padding: 8px 12px;
+      border: 1px solid #d1d5db;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+    input[type="text"]:focus {
+      outline: none;
+      border-color: #0366d6;
+      box-shadow: 0 0 0 3px rgba(3, 102, 214, 0.1);
+    }
+    .icon-button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+      display: flex;
+      align-items: center;
+      color: #586069;
+    }
+    .icon-button:hover {
+      color: #0366d6;
+    }
+    .icon-button svg {
+      width: 16px;
+      height: 16px;
+    }
+    .help-text {
+      font-size: 12px;
+      color: #586069;
+      line-height: 1.5;
+      margin-top: 8px;
+      padding: 8px;
+      background: #f6f8fa;
+      border-radius: 6px;
+      display: none;
+    }
+    .help-text.show {
+      display: block;
+    }
+    .status {
+      font-size: 12px;
+      color: #28a745;
+      margin-top: 8px;
+      display: none;
+    }
+    .status.show {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <svg class="github-icon" viewBox="0 0 16 16" fill="currentColor">
+      <path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+    </svg>
+    <input type="text" id="patInput" placeholder="Input your GitHub PAT...">
+    <button class="icon-button" id="linkButton" title="Create a new PAT">
+      <svg viewBox="0 0 16 16" fill="currentColor">
+        <path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13z"/>
+        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+      </svg>
+    </button>
+    <button class="icon-button" id="helpButton" title="What is a PAT?">
+      <svg viewBox="0 0 16 16" fill="currentColor">
+        <path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13z"/>
+        <path d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.326 0-2.786.647-2.754 2.533zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z"/>
+      </svg>
+    </button>
+  </div>
+  <div class="help-text" id="helpText">
+    A PAT (Personal Access Token) is necessary to get the size of private repos on GitHub. To create a PAT, go to the create link and make one with no expiration date, all repositories access, and have the only permissions be "Metadata" with read-only access.
+  </div>
+  <div class="status" id="status">PAT saved!</div>
+</body>
+<script src="popup.js"></script>
+</html>
+
