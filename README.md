@@ -1,8 +1,8 @@
 # RepoRuler
 Chrome extension that displays GitHub repository size in the About section next to forks and stars. I created this because one time I accidentally cloned a repo that was 40GB.
 
-## Get Extension
-`insert chrome extenstion link after i register it`
+## [Get Extension](https://chromewebstore.google.com/detail/reporuler/pbffgdgaelgacobpfgidjkpeoaljgpij)
+https://chromewebstore.google.com/detail/reporuler/pbffgdgaelgacobpfgidjkpeoaljgpij
 
 ## GitHub
 Works for public repos. Private repos need a PAT.
