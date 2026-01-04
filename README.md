@@ -16,4 +16,4 @@ This extension will likely not be updated to include a GitLab integration in the
 1. Clone the repo
 2. Go to `chrome://extensions/`
 3. Toggle "Developer mode" switch in the top-right corner
-4. Click "Load unpacked" button and select the repo
+4. Click "Load unpacked" button and select the directory
